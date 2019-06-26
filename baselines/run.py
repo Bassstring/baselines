@@ -4,6 +4,7 @@ import multiprocessing
 import os.path as osp
 import gym
 import dreamduck
+import gym_duckietown
 from collections import defaultdict
 import tensorflow as tf
 import numpy as np
