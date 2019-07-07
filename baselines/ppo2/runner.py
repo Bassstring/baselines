@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from baselines.common.runners import AbstractEnvRunner
 
 class Runner(AbstractEnvRunner):
@@ -40,6 +41,8 @@ class Runner(AbstractEnvRunner):
                 maybeepinfo = info.get('episode')
                 if maybeepinfo: epinfos.append(maybeepinfo)
             mb_rewards.append(rewards)
+            if os.environ.get('DEBUG_BASELINES'):
+                self.env.render()
         #batch of steps to batch of rollouts
         mb_obs = np.asarray(mb_obs, dtype=self.obs.dtype)
         mb_rewards = np.asarray(mb_rewards, dtype=np.float32)

@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from baselines.common.runners import AbstractEnvRunner
 from baselines.common.vec_env.vec_frame_stack import VecFrameStack
 from gym import spaces
@@ -40,6 +41,8 @@ class Runner(AbstractEnvRunner):
             self.obs = obs
             mb_rewards.append(rewards)
             enc_obs.append(obs[..., -self.nc:])
+            if os.environ.get('DEBUG_BASELINES'):
+                self.env.render()
         mb_obs.append(np.copy(self.obs))
         mb_dones.append(self.dones)
 

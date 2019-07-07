@@ -1,4 +1,5 @@
 import numpy as np
+jmport os
 from baselines.a2c.utils import discount_with_dones
 from baselines.common.runners import AbstractEnvRunner
 
@@ -43,6 +44,8 @@ class Runner(AbstractEnvRunner):
             self.dones = dones
             self.obs = obs
             mb_rewards.append(rewards)
+            if os.environ.get('DEBUG_BASELINES'):
+                self.env.render()
         mb_dones.append(self.dones)
 
         # Batch of steps to batch of rollouts
